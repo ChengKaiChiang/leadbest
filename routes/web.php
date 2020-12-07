@@ -17,4 +17,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::apiResource('test', 'TestController');
 Route::post('/getPrimeFactor', 'TestController@printNumbers');
