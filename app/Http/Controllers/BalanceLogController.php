@@ -47,20 +47,20 @@ class BalanceLogController extends Controller
         $new_creditor_money = $creditor->balance - $amount;
         $new_debitor_money = $debitor->balance + $amount;
 
-        // BalanceLog::create([
-        //     'user_id' => $creditor_user,
-        //     'transaction_type' => 'CREDIT',
-        //     'amount' => $amount,
-        // ]);
+        BalanceLog::create([
+            'user_id' => $creditor_user,
+            'transaction_type' => 'CREDIT',
+            'amount' => $amount,
+        ]);
 
-        // BalanceLog::create([
-        //     'user_id' => $debitor_user,
-        //     'transaction_type' => 'DEBIT',
-        //     'amount' => $amount,
-        // ]);
+        BalanceLog::create([
+            'user_id' => $debitor_user,
+            'transaction_type' => 'DEBIT',
+            'amount' => $amount,
+        ]);
 
-        // Balance::where('user_id', $creditor_user)->update(['balance' => $new_creditor_money]);
-        // Balance::where('user_id', $debitor_user)->update(['balance' => $new_debitor_money]);
+        Balance::where('user_id', $creditor_user)->update(['balance' => $new_creditor_money]);
+        Balance::where('user_id', $debitor_user)->update(['balance' => $new_debitor_money]);
 
         return response("tranfer success", 200);
     }
