@@ -13,9 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+// Route::group(['domain' => 'test-api.leadbest.io'], function(){
+//     Route::apiResource('post', 'PostController');
+// });
 
 Route::apiResource('test', 'TestController');
+Route::apiResource('balance', 'BalanceController');
+Route::post('transfer', 'BalanceLogController@transfer');
+Route::get('balance-log', 'BalanceLogController@index');
 Route::post('/getPrimeFactor', 'TestController@printNumbers');
