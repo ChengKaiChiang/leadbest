@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use \Illuminate\Database\QueryException;
 use \App\Models\Balance;
-
+use \App\Http\Requests\BalanceRequest;
 class BalanceController extends Controller
 {
     /**
@@ -26,18 +26,9 @@ class BalanceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BalanceRequest $request)
     {
-        //
-        $validator = Validator::make($request->all(), [
-            'user_id' => 'required',
-            'balance' => 'required | integer',
-        ]);
-        if ($validator->fails()) {
-            return response($validator->errors(), 400);
-        }
-
-        $validatedData = $validator->validate();
+        $validatedData = $request->validated();
 
         try {
             $user_id = $validatedData['user_id'];
